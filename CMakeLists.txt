@@ -3,5 +3,5 @@ project(algorithm)
 
 set(CMAKE_C_STANDARD 99)
 
-set(SOURCE_FILES main.c List.c List.h)
+set(SOURCE_FILES List.h main.cpp)
 add_executable(algorithm ${SOURCE_FILES})

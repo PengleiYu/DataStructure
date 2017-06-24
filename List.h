@@ -1,40 +1,122 @@
 //
-// Created by yupen on 2017/6/24.
+// Created by yupenglei on 2017/6/25.
 //
-
-
-#include <stdbool.h>
+#include "base.h"
 
 #ifndef ALGORITHM_LIST_H
 #define ALGORITHM_LIST_H
 
 #endif //ALGORITHM_LIST_H
 
-#define InitSize 20
-typedef int ElemType;
+#include <stdlib.h>
+#include <iostream>
+
+using namespace std;
+
+class List {
+public:
+    virtual void InitList()=0;
+
+    virtual int Length()=0;
+
+    virtual int LocateElem(Elem)=0;
+
+    virtual void GetElem(int, Elem *)=0;
+
+    virtual bool ListInsert(int, Elem)=0;
+
+    virtual bool ListDelete(int, Elem *)=0;
+
+    virtual void PrintList()=0;
+
+    virtual bool Empty()=0;
+
+    virtual void DestroyList()=0;
+};
 
 /**
- * index从1开始
+ * 顺序表实现
  */
-typedef struct array {
-    ElemType *data;
-    int MaxSize, length;
-} List;
+class ArrayList : public List {
+private:
+    Elem *data;
+    int maxSize, length;
+public:
+    virtual void InitList() {
+        data = (Elem *) malloc((sizeof(Elem) * InitSize));
+        length = 0;
+        maxSize = InitSize;
+    }
 
-void InitList(List *p);
+    virtual int Length() {
+        return length;
+    }
 
-int Length(List);
+    /**
+     * 1,插入操作
+     */
+    virtual bool ListInsert(int i, Elem elem) {
+        if (i < 1 || i > length + 1) {
+            return false;
+        }
+        if (length >= maxSize) {
+            return false;
+        }
+        for (int j = length; j >= i; j--) {
+            data[j] = data[j - 1];
+        }
+        data[i - 1] = elem;
+        length++;
+        return true;
+    }
 
-int LocateElem(List, ElemType);
+    /**
+     * 2,删除操作
+     */
+    virtual bool ListDelete(int i, Elem *elem) {
+        if (i < 1 || i > length) {
+            return false;
+        }
+        *elem = data[i - 1];
+        for (int j = i; j < length; j++) {
+            data[j - 1] = data[j];
+        }
+        length--;
+        return true;
+    }
 
-ElemType GetElem(List, int);
+    /**
+     * 3,按值查找
+     */
+    virtual int LocateElem(Elem elem) {
+        for (int i = 0; i < length; i++) {
+            if (data[i] == elem) {
+                return i + 1;
+            }
+        }
+        return 0;
+    }
 
-bool ListInsert(List *, int, ElemType);
+    virtual void GetElem(int i, Elem *elem) {
+        if (i < 1 || i > length) {
+            return;
+        }
+        *elem = data[i - 1];
+    }
 
-bool ListDelete(List *, int, ElemType *);
+    virtual void PrintList() {
+        cout << "array: [ ";
+        for (int i = 0; i < length; i++) {
+            cout << data[i] << " ";
+        }
+        cout << "]" << endl;
+    }
 
-void PrintList(List);
+    virtual bool Empty() {
+        return length == 0;
+    }
 
-bool Empty(List);
+    virtual void DestroyList() {
 
-void DestroyList(List *);
+    }
+};
