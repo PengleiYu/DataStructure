@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/yupen/CLionProjects/algorithm/List.c
+stdlib.h
+-
+stdio.h
+-
+List.h
+C:/Users/yupen/CLionProjects/algorithm/List.h
+
+C:/Users/yupen/CLionProjects/algorithm/List.h
+stdbool.h
+-
+
+C:/Users/yupen/CLionProjects/algorithm/main.c
+stdio.h
+-
+List.h
+C:/Users/yupen/CLionProjects/algorithm/List.h
+
