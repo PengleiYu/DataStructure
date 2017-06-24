@@ -8,10 +8,7 @@
 
 #endif //ALGORITHM_LIST_H
 
-#include <stdlib.h>
-#include <iostream>
 
-using namespace std;
 
 class List {
 public:
@@ -114,6 +111,103 @@ public:
 
     virtual bool Empty() {
         return length == 0;
+    }
+
+    virtual void DestroyList() {
+
+    }
+};
+
+class Node {
+public:
+    Elem data;
+    Node *next;
+};
+
+class SinglyLinkedList : Node, List {
+
+public:
+    //todo 待抽象到父类中
+    /**
+     * 头插法
+     * 产生的是倒序链表
+     */
+    static SinglyLinkedList CreateList1(SinglyLinkedList *list) {
+        Node *s;
+        int x;
+        list = (SinglyLinkedList *) malloc(sizeof(Node));
+        list->next = NULL;
+
+        cin >> x;
+        while (x != 999) {
+            s = (Node *) malloc(sizeof(Node));
+            s->data = x;
+            s->next = list->next;
+            list->next = s;
+            cin >> x;
+        }
+        return *list;
+    }
+
+    /**
+     * 尾插法
+     * 产生的是正序链表
+     */
+    static SinglyLinkedList CreateList2(SinglyLinkedList *list) {
+        Node *s;
+        Node *r;//表尾指针
+        int x;
+        list = (SinglyLinkedList *) malloc(sizeof(Node));
+        list->next = NULL;
+        r = list; //表尾指针初始化，指向表头
+
+        cin >> x;
+        while (x != 999) {
+            s = (Node *) malloc(sizeof(Node));
+            s->data = x;
+            r->next = s;
+            r = s; //表尾指针指向s
+            cin >> x;
+        }
+        return *list;
+    }
+
+    virtual void InitList() {
+        next = NULL;
+    }
+
+    virtual int Length() {
+        return 0;
+    }
+
+    virtual int LocateElem(Elem elem) {
+        return 0;
+    }
+
+    virtual void GetElem(int i, Elem *elem) {
+
+    }
+
+    virtual bool ListInsert(int i, Elem elem) {
+        return false;
+    }
+
+    virtual bool ListDelete(int i, Elem *elem) {
+        return false;
+    }
+
+    virtual void PrintList() {
+        Node *node = this;
+        cout << "LinkedList: { ";
+        while (node->next != NULL) {
+            node = node->next;
+            cout << node->data << " ";
+        }
+        cout << "}";
+    }
+
+    virtual bool Empty() {
+        return false;
     }
 
     virtual void DestroyList() {

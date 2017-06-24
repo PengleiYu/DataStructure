@@ -9,8 +9,11 @@
 void testList(List *);
 
 int main() {
-    ArrayList arrayList;
-    testList(&arrayList);
+//    ArrayList arrayList;
+//    testList(&arrayList);
+    SinglyLinkedList *list;
+    SinglyLinkedList::CreateList1(list);
+    list->PrintList();
 }
 
 void testList(List *list) {
