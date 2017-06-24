@@ -20,6 +20,9 @@ void PrintList(List list) {
     printf("]\n");
 }
 
+/**
+ * 重要操作1
+ */
 bool ListInsert(List *list, int i, ElemType e) {
     if (i < 1 || i > list->length + 1) {
         return false;
@@ -36,6 +39,9 @@ bool ListInsert(List *list, int i, ElemType e) {
     return true;
 }
 
+/**
+ * 重要操作2
+ */
 bool ListDelete(List *list, int i, ElemType *e) {
     if (i < 1 || i > list->length) {
         return false;
@@ -46,4 +52,16 @@ bool ListDelete(List *list, int i, ElemType *e) {
     }
     list->length--;
     return true;
+}
+
+/**
+ * 重要操作3
+ */
+int LocateElem(List list, ElemType e) {
+    for (int i = 0; i < list.length; i++) {
+        if (list.data[i] == e) {
+            return i + 1;
+        }
+    }
+    return 0;
 }

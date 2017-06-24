@@ -12,6 +12,11 @@ int main() {
         PrintList(list);
     }
 
+    for (int i = 0; i < 10; i++) {
+        int index = LocateElem(list, i);
+        printf("index=%d\n", index);
+    }
+
     for (int i = 1; i < 10; i++) {
         ElemType elemType = -1;
         bool b = ListDelete(&list, 2, &elemType);
